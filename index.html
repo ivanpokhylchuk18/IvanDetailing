@@ -246,37 +246,94 @@
         <h2 class="section-title">Before &amp; After</h2>
         <p class="section-sub">Results speak louder than words.</p>
       </div>
-      <div class="gallery-grid">
-        <div class="gallery-item tall" data-aos="fade-up">
-          <div class="gallery-placeholder">
-            <div class="gp-inner">
-              <span class="gp-label">Interior</span>
-              <span class="gp-sub">Before &amp; After</span>
-            </div>
-          </div>
-          <div class="gallery-overlay"><span>Interior Detail</span></div>
-        </div>
-        <div class="gallery-item" data-aos="fade-up" data-aos-delay="80">
-          <div class="gallery-placeholder gp2">
-            <div class="gp-inner">
-              <span class="gp-label">Wheels</span>
-              <span class="gp-sub">Before &amp; After</span>
-            </div>
-          </div>
-          <div class="gallery-overlay"><span>Wheel Detail</span></div>
-        </div>
-        <div class="gallery-item wide" data-aos="fade-up" data-aos-delay="160">
-          <div class="gallery-placeholder gp4">
-            <div class="gp-inner">
-              <span class="gp-label">Exterior</span>
-              <span class="gp-sub">Before &amp; After</span>
-            </div>
-          </div>
-          <div class="gallery-overlay"><span>Exterior Detail</span></div>
-        </div>
+      
+
+      <div class="gallery-cta-wrap">
+        <button class="btn-see-photos" id="openGalleryModal">
+          <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
+            <rect x="3" y="3" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.6"/>
+            <rect x="13" y="3" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.6"/>
+            <rect x="3" y="13" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.6"/>
+            <rect x="13" y="13" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.6"/>
+          </svg>
+          See Before &amp; After Photos
+        </button>
       </div>
     </div>
   </section>
+
+  <!-- GALLERY MODAL -->
+  <div id="galleryModal" class="gallery-modal" role="dialog" aria-modal="true" aria-label="Before and After Photos">
+    <div class="gallery-modal-backdrop" id="galleryModalBackdrop"></div>
+    <div class="gallery-modal-panel">
+      <div class="gallery-modal-header">
+        <div>
+          <span class="section-tag" style="margin-bottom:0.3rem">Our Work</span>
+          <h2 class="gallery-modal-title">Before &amp; After</h2>
+        </div>
+        <button class="gallery-modal-close" id="closeGalleryModal" aria-label="Close">&times;</button>
+      </div>
+
+      <div class="gallery-modal-cols-header">
+        <div class="gallery-col-label gallery-col-label--before">
+          <span class="col-label-dot col-label-dot--before"></span>
+          Before
+        </div>
+        <div class="gallery-col-label gallery-col-label--after">
+          After
+          <span class="col-label-dot col-label-dot--after"></span>
+        </div>
+      </div>
+
+      <div class="gallery-modal-body" id="galleryModalBody">
+
+        <!-- Row 1: Interior Detail -->
+        <div class="gm-row">
+          <div class="gm-cell gm-cell--before">
+            <div class="gm-img-wrap">
+              <img src="static/images/IMG_1907.jpeg" alt="Interior Before" loading="lazy">
+              <span class="gm-badge gm-badge--before">Before</span>
+            </div>
+            <p class="gm-caption">Interior Detail</p>
+          </div>
+          <div class="gm-divider-col"><div class="gm-divider-line"></div><div class="gm-divider-arrow">→</div></div>
+          <div class="gm-cell gm-cell--after">
+            <div class="gm-img-wrap">
+              <img src="static/images/IMG_1908.jpeg" alt="Interior After" loading="lazy">
+              <span class="gm-badge gm-badge--after">After</span>
+            </div>
+            <p class="gm-caption">Interior Detail</p>
+          </div>
+        </div>
+
+        <!-- Row 2: Exterior Detail -->
+        <div class="gm-row">
+          <div class="gm-cell gm-cell--before">
+            <div class="gm-img-wrap">
+              <img src="static/images/exterior-before.jpg" alt="Exterior Before" loading="lazy">
+              <span class="gm-badge gm-badge--before">Before</span>
+            </div>
+            <p class="gm-caption">Exterior Detail</p>
+          </div>
+          <div class="gm-divider-col"><div class="gm-divider-line"></div><div class="gm-divider-arrow">→</div></div>
+          <div class="gm-cell gm-cell--after">
+            <div class="gm-img-wrap">
+              <img src="static/images/exterior-after.jpg" alt="Exterior After" loading="lazy">
+              <span class="gm-badge gm-badge--after">After</span>
+            </div>
+            <p class="gm-caption">Exterior Detail</p>
+          </div>
+        </div>
+
+        <!-- Add more rows here as you get more photos -->
+
+      </div>
+
+      <div class="gallery-modal-footer">
+        <a href="#booking" class="btn-primary" id="galleryBookBtn">Book Your Detail →</a>
+      </div>
+    </div>
+  </div>
 
   <!-- TESTIMONIALS -->
   <section class="testimonials" id="testimonials">

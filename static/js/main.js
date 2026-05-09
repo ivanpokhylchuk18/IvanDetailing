@@ -450,12 +450,29 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
+  // ── Before After Slider ───────────────────
+  document.querySelectorAll('.before-after-slider').forEach(slider => {
+    const updateSlider = () => {
+      const container = slider.closest('.before-after-container');
+      const afterImg = container.querySelector('.after-image');
+      const line = container.querySelector('.slider-line');
+      const handle = container.querySelector('.slider-handle');
+      const pct = slider.value;
+      afterImg.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+      line.style.left = pct + '%';
+      handle.style.left = pct + '%';
+    };
+    slider.addEventListener('input', updateSlider);
+    updateSlider(); // Initial update
+  });
+
+
   // ── Gallery lightbox (simple) ─────────────
   document.querySelectorAll('.gallery-item').forEach(item => {
     item.addEventListener('click', () => {
       const label = item.querySelector('.gallery-overlay span')?.textContent || 'Photo';
-      const img = item.querySelector('img');
-      if (!img) return;
+      const afterImg = item.querySelector('.after-image');
+      if (!afterImg) return;
       const overlay = document.createElement('div');
       overlay.style.cssText = `
         position:fixed;inset:0;background:rgba(0,0,0,0.92);
@@ -463,7 +480,7 @@ document.addEventListener('DOMContentLoaded', () => {
         z-index:9999;cursor:zoom-out;padding:2rem;
       `;
       const imgClone = document.createElement('img');
-      imgClone.src   = img.src;
+      imgClone.src   = afterImg.src;
       imgClone.alt   = label;
       imgClone.style.cssText = 'max-width:90vw;max-height:85vh;border-radius:8px;object-fit:contain;';
       overlay.appendChild(imgClone);
@@ -523,6 +540,55 @@ document.addEventListener('DOMContentLoaded', () => {
         modalMsg.innerHTML = '<span style="color:var(--red);">❌ Error submitting review. Please try again or contact us.</span>';
         console.error(err);
       }
+    });
+  }
+
+  // ── Gallery Modal ─────────────────────────
+  const galleryModal        = document.getElementById('galleryModal');
+  const openGalleryBtn      = document.getElementById('openGalleryModal');
+  const closeGalleryBtn     = document.getElementById('closeGalleryModal');
+  const galleryBackdrop     = document.getElementById('galleryModalBackdrop');
+  const galleryBookBtn      = document.getElementById('galleryBookBtn');
+
+  function openGalleryModal() {
+    galleryModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeGalleryModal() {
+    galleryModal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  if (openGalleryBtn) openGalleryBtn.addEventListener('click', openGalleryModal);
+  if (closeGalleryBtn) closeGalleryBtn.addEventListener('click', closeGalleryModal);
+  if (galleryBackdrop) galleryBackdrop.addEventListener('click', closeGalleryModal);
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && galleryModal.classList.contains('open')) closeGalleryModal();
+  });
+
+  // Lightbox for gallery modal images
+  document.querySelectorAll('.gm-img-wrap img').forEach(img => {
+    img.addEventListener('click', () => {
+      const overlay = document.createElement('div');
+      overlay.style.cssText = `
+        position:fixed;inset:0;background:rgba(0,0,0,0.95);
+        display:flex;align-items:center;justify-content:center;
+        z-index:20000;cursor:zoom-out;padding:2rem;
+      `;
+      const imgClone = document.createElement('img');
+      imgClone.src = img.src;
+      imgClone.alt = img.alt;
+      imgClone.style.cssText = 'max-width:90vw;max-height:88vh;border-radius:8px;object-fit:contain;';
+      overlay.appendChild(imgClone);
+      overlay.addEventListener('click', () => overlay.remove());
+      document.body.appendChild(overlay);
+    });
+  });
+
+  if (galleryBookBtn) {
+    galleryBookBtn.addEventListener('click', () => {
+      closeGalleryModal();
     });
   }
 
